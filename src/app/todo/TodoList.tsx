@@ -4,6 +4,7 @@ import type { RootState } from "@/store";
 import TodoItem from "./TodoItem";
 import AddTodoButton from "./AddTodoButton";
 import { reorderTodos, Todo } from "@/todoSlice";
+import { useEffect } from "react";
 
 export default function TodoList() {
   const todos = useSelector((state: RootState) => state.todo.todos);
@@ -12,6 +13,20 @@ export default function TodoList() {
   const handleReorder = (startIndex: number, endIndex: number) => {
     dispatch(reorderTodos({ startIndex, endIndex }));
   };
+
+  useEffect(() => {
+    const savedTodos = localStorage.getItem("todo_list");
+    if (savedTodos) {
+      try {
+        const parsed = JSON.parse(savedTodos);
+        dispatch({ type: "todo/setTodos", payload: parsed });
+      } catch {}
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem("todo_list", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <div>

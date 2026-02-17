@@ -41,6 +41,18 @@ export default function ForecastPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    const savedLocation = localStorage.getItem("forecast_location");
+    const savedDays = localStorage.getItem("forecast_days");
+    if (savedLocation) setLocation(savedLocation);
+    if (savedDays) setDays(Number(savedDays));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("forecast_location", location);
+    localStorage.setItem("forecast_days", days.toString());
+  }, [location, days]);
+
+  useEffect(() => {
     if (!queryLocation) return;
     let ignore = false;
     async function fetchAll() {
