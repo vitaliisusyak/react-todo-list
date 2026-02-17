@@ -32,6 +32,10 @@ const todoSlice = createSlice({
       const todo = state.todos.find(todo => todo.id === action.payload.id);
       if (todo) todo.text = action.payload.text;
     },
+    completeTodo: (state, action: PayloadAction<{ id: string; complete: boolean }>) => {
+      const todo = state.todos.find(todo => todo.id === action.payload.id);
+      if (todo) todo.completed = action.payload.complete;
+    },
     reorderTodos: (state, action: PayloadAction<{ startIndex: number; endIndex: number }>) => {
       const [removed] = state.todos.splice(action.payload.startIndex, 1);
       state.todos.splice(action.payload.endIndex, 0, removed);
@@ -39,5 +43,5 @@ const todoSlice = createSlice({
   },
 });
 
-export const { addTodo, deleteTodo, editTodo, reorderTodos } = todoSlice.actions;
+export const { addTodo, deleteTodo, editTodo, completeTodo, reorderTodos } = todoSlice.actions;
 export default todoSlice.reducer;

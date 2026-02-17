@@ -2,6 +2,7 @@
 import { useDispatch } from "react-redux";
 import { addTodo } from "../../todoSlice";
 import { useState } from "react";
+import { FaPlus } from "react-icons/fa";
 
 export default function AddTodoButton() {
   const [text, setText] = useState("");
@@ -15,19 +16,16 @@ export default function AddTodoButton() {
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 w-1/2">
       <input
-        className="border rounded px-2 py-1 flex-1"
+        className="border-0 border-b-2 border-blue-400 focus:border-blue-600 bg-transparent px-2 py-1 flex-1 outline-none transition-colors duration-200"
         value={text}
         onChange={e => setText(e.target.value)}
-        placeholder="Add a new todo..."
+        placeholder="Add a new task..."
         onKeyDown={e => { if (e.key === 'Enter') handleAdd(); }}
       />
-      <button
-        className="bg-blue-600 text-white px-4 py-1 rounded"
-        onClick={handleAdd}
-      >
-        Add
+      <button className="cursor-pointer" onClick={handleAdd} title="Add">
+        <FaPlus />
       </button>
     </div>
   );
