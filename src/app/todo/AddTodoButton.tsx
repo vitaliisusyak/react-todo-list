@@ -16,7 +16,7 @@ export default function AddTodoButton() {
   };
 
   return (
-    <div className="flex gap-2 w-1/2">
+    <div className="flex gap-2">
       <input
         className="border-0 border-b-2 border-blue-400 focus:border-blue-600 bg-transparent px-2 py-1 flex-1 outline-none transition-colors duration-200"
         value={text}

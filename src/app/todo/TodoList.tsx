@@ -16,7 +16,7 @@ export default function TodoList() {
   return (
     <div>
       <AddTodoButton />
-      <ul className="mt-4 space-y-2 w-1/2">
+      <ul className="mt-4 space-y-2">
         {todos.map((todo: Todo, idx: number) => (
           <TodoItem key={todo.id} todo={todo} index={idx} onReorder={handleReorder} />
         ))}
